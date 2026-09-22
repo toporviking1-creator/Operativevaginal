@@ -133,13 +133,20 @@ th{background:var(--soft)}
 /* protocol */
 #protoText{width:100%;min-height:360px;font-size:14.5px;line-height:1.45;white-space:pre-wrap}
 /* nav */
-nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1.5px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom,0px)}
-nav.tabs button{background:none;border:0;padding:10px 2px 11px;font-weight:700;font-size:13px;color:var(--ink2);cursor:pointer;border-top:3px solid transparent}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1.5px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs button{background:none;border:0;padding:10px 2px 11px;font-weight:700;font-size:12px;color:var(--ink2);cursor:pointer;border-top:3px solid transparent}
 nav.tabs button .ic{display:block;font-size:19px;line-height:1.1}
 nav.tabs button.on{color:var(--acc);border-top-color:var(--acc)}
 nav.tabs button:focus-visible{outline:3px solid var(--acc);outline-offset:-3px}
 .toolbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px}
 .small{font-size:14px;padding:8px 12px}
+.tips{margin:0;padding:0;list-style:none}
+.tips li{padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.tips li:first-child{border-top:0;padding-top:4px}
+.tips b{font-weight:800}
+.tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:6px;background:var(--soft);color:var(--ink2);font-size:12.5px;font-weight:700;white-space:nowrap}
+.tag.ru{background:var(--acc-bg);color:var(--ink)}
+.key{border-left:4px solid var(--warn);background:var(--warn-bg);padding:10px 12px;border-radius:0 10px 10px 0;margin:0 0 12px;font-size:15px}
 #printArea{display:none}
 @media print{
   body{background:#fff;color:#000}
@@ -260,7 +267,7 @@ nav.tabs button:focus-visible{outline:3px solid var(--acc);outline-offset:-3px}
       <div class="seg"><label><input type="radio" name="tool" value="ve">Вакуум-экстракция</label><label><input type="radio" name="tool" value="af">Акушерские щипцы</label></div>
     </div>
     <div class="clock" id="clock">00:00</div>
-    <div class="sub" id="clockSub">Нажмите «Начать», когда инструмент наложен</div>
+    <div class="sub" id="clockSub">Нажмите «Начать», когда чашечка наложена и создано разрежение</div>
     <div class="alerts" id="opAlerts"></div>
     <div class="counters">
       <div class="cnt"><b id="cTr">0</b><span>тракций</span></div>
@@ -326,6 +333,55 @@ nav.tabs button:focus-visible{outline:3px solid var(--acc);outline-offset:-3px}
     </div>
     <div class="note" id="copyNote"></div>
   </section>
+</div>
+
+<!-- ============ СОВЕТЫ ВЭП ============ -->
+<div class="tab" id="t-tips">
+  <div class="key"><b>Шиньон формируется 1–2 минуты после создания разрежения.</b> Тянуть раньше — главная причина соскальзывания. В режиме «Операция» таймер шиньона включается сам.</div>
+
+  <section class="card"><h2>До наложения</h2><ul class="tips">
+    <li><b>Позиция головки — обязательно и точно.</b> Без неё чашечку правильно не поставить. При сомнении — УЗИ.<span class="tag ru">КР 2023</span></li>
+    <li><b>Наружное и влагалищное расходятся — делай УЗИ.</b> При большой родовой опухоли мягкие ткани ниже остей, а ведущая костная часть может быть выше.<span class="tag">RANZCOG</span></li>
+    <li><b>Station ≠ вставление.</b> При конфигурации и неправильных вставлениях ведущая точка ниже остей, а наибольший диаметр ещё над входом.<span class="tag">BPR 2019</span></li>
+    <li><b>Факторы трудности:</b> ИМТ &gt; 30, плод &gt; 4000 г, задний вид, головка в широкой части. Рассмотри попытку в операционной.<span class="tag ru">КР 2017</span><span class="tag">RCOG</span></li>
+    <li><b>Чашечка под вид.</b> Металлическая тянет сильнее и успешнее при боковых и задних видах; при поперечном и заднем виде в полости OP-чашечка или Kiwi лучше передних.<span class="tag">RANZCOG</span></li>
+  </ul></section>
+
+  <section class="card"><h2>Наложение</h2><ul class="tips">
+    <li><b>Центр чашечки — на точке сгибания:</b> стреловидный шов, 3 см кпереди от малого родничка.<span class="tag">Vacca</span></li>
+    <li><b>Проверка по краям (чашечка 60 мм):</b> один край заходит на малый родничок, от другого до большого около 3 см.<span class="tag">Vacca</span></li>
+    <li><b>Ближе к большому родничку — ошибка.</b> Тракции разгибают головку, в таз идёт больший размер, отсюда соскальзывания и неудачи.<span class="tag">Vacca</span></li>
+    <li><b>Задний вид — тянись глубже.</b> Точка сгибания лежит дальше кзади, чем кажется, и для ротационных родов её точность ещё важнее.<span class="tag">BPR 2019</span></li>
+    <li><b>Обведи пальцем всю окружность чашечки</b> до и после разрежения: шейка или стенка влагалища под чашечкой — травма и отрыв.<span class="tag ru">КР 2023</span></li>
+    <li><b>Разрежение 500–600 мм рт. ст.</b> Можно сначала дать низкое, проверить позицию и только потом довести до рабочего. При срочности быстрое создание разрежения не хуже ступенчатого.<span class="tag ru">КР 2023</span><span class="tag">Cochrane</span></li>
+    <li><b>Шиньон — 1–2 минуты. Не тяни раньше.</b><span class="tag">RANZCOG</span></li>
+  </ul></section>
+
+  <section class="card"><h2>Тракции</h2><ul class="tips">
+    <li><b>По оси таза и перпендикулярно чашечке.</b> Чем выше головка, тем больше книзу, к прямой кишке; при прорезывании — кверху, к животу. Стержень держи перпендикулярно чашечке, иначе край отходит.<span class="tag">AAFP</span></li>
+    <li><b>Не разгибай рано.</b> Преждевременное разгибание увеличивает прорезывающийся размер и травму промежности.<span class="tag">ALARM</span></li>
+    <li><b>Не крути чашечку.</b> Ротационную силу не прикладывают, головка поворачивается сама.<span class="tag">ALARM</span></li>
+    <li><b>Жди автоповорот.</b> При чашечке на точке сгибания и правильной оси 90% и больше задних и поперечных видов поворачиваются в передний сами.<span class="tag">Vacca</span></li>
+    <li><b>Признак сгибания при заднем и боковом виде:</b> трубка удлиняется на первой тракции — точка сгибания стала ведущей. Дальше должно быть опускание.<span class="tag">Obgyn Key</span></li>
+    <li><b>Контролирующая рука — датчик отрыва.</b> Большой палец на чашечке, указательный на головке у края. Почувствовал начало отрыва — ослабь тягу.<span class="tag ru">КР 2023</span><span class="tag">AAFP</span></li>
+    <li><b>Только со схваткой и потугой.</b> Держать или сбрасывать разрежение между схватками — по данным РКИ, без разницы в исходах.<span class="tag">AAFP</span></li>
+    <li><b>Сила тяги не больше 11,5 кг,</b> ориентир по длительности — 15 минут (Vacca), предел по КР — 20 минут.<span class="tag">Vacca</span><span class="tag ru">КР 2023</span></li>
+  </ul></section>
+
+  <section class="card"><h2>Когда остановиться</h2><ul class="tips">
+    <li><b>Стоп по КР:</b> нет продвижения при правильной технике; нет опускания за 3 тракции; больше 2 соскальзываний; больше 20 минут.<span class="tag ru">КР 2023</span></li>
+    <li><b>Головка на тазовом дне или промежности</b> — больше трёх тракций допустимо, если опускание есть на каждой.<span class="tag">RANZCOG</span></li>
+    <li><b>Соскользнула — разберись почему,</b> осмотри кожу головы, и только потом накладывай снова. Каждое наложение — новая попытка.<span class="tag">Obgyn Key</span><span class="tag ru">КР 2023</span></li>
+    <li><b>Второй инструмент — только после хорошего опускания.</b> Если уже был критерий остановки — КС.<span class="tag">RANZCOG</span><span class="tag ru">КР 2023</span></li>
+  </ul></section>
+
+  <section class="card"><h2>Промежность и после</h2><ul class="tips">
+    <li><b>Эпизиотомия у первородящих:</b> при ВЭП на 16% меньше травм анального сфинктера. Срединно-латеральная под 60°, по клинике и с согласия.<span class="tag">RCOG</span><span class="tag ru">КР 2023</span></li>
+    <li><b>Сброс разрежения — когда видна нижняя челюсть</b> (по КР — после рождения головки).<span class="tag">RANZCOG</span><span class="tag ru">КР 2023</span></li>
+    <li><b>Готовься к дистоции плечиков:</b> 2,7% при ВЭП.<span class="tag ru">КР 2023</span></li>
+    <li><b>Трудная ВЭП, переход на КС или второй инструмент — скажи неонатологу:</b> наблюдение на субгалеальное кровоизлияние.<span class="tag">RANZCOG</span></li>
+  </ul></section>
+  <p class="note">Источники: КР РОАГ 2023 (ID 775); протокол РОАГ 2017; RCOG Green-top No. 26 (2020); RANZCOG C-Obs 16 (через протокол KEMH 2023); A. Vacca, Handbook of Vacuum Delivery; AAFP 2000; ALARM International; обзор Best Pract Res Clin Obstet Gynaecol 2019. Советы из зарубежных источников не заменяют КР.</p>
 </div>
 
 <!-- ============ СПРАВКА ============ -->
@@ -460,6 +516,7 @@ nav.tabs button:focus-visible{outline:3px solid var(--acc);outline-offset:-3px}
   <button data-t="t-op"><span class="ic">⏱</span>Операция</button>
   <button data-t="t-post"><span class="ic">💉</span>После</button>
   <button data-t="t-proto"><span class="ic">📄</span>Протокол</button>
+  <button data-t="t-tips"><span class="ic">💡</span>Советы</button>
   <button data-t="t-ref"><span class="ic">📖</span>Справка</button>
 </nav>
 
@@ -593,13 +650,13 @@ const hm=t=>{const d=new Date(t);return String(d.getHours()).padStart(2,'0')+':'
 function opLog(txt){S.op.log.push({t:now(),txt});save()}
 function opAct(a){
   const o=S.op,tool=S.tool;
-  if(a==='start'){if(!tool){alert('Выберите инструмент');return}Object.assign(o,fresh().op,{start:now(),tools:[tool]});opLog((tool==='ve'?'Чашечка ВЭ наложена':'Ложки щипцов наложены')+', начало операции')}
+  if(a==='start'){if(!tool){alert('Выберите инструмент');return}Object.assign(o,fresh().op,{start:now(),appT:now(),trAtApp:0,tools:[tool]});opLog((tool==='ve'?'Чашечка ВЭ наложена':'Ложки щипцов наложены')+', начало операции')}
   if(!o.start)return;
   if(a==='trP'){o.tr++;o.pr++;o.last=now();opLog('Тракция '+o.tr+': продвижение есть')}
   if(a==='trN'){o.tr++;o.last=now();opLog('Тракция '+o.tr+': продвижения нет')}
   if(a==='trial'){opLog('Пробная тракция: наложение правильное')}
   if(a==='slip'){o.slip++;opLog('Соскальзывание чашечки ('+o.slip+')');}
-  if(a==='reapp'){o.att++;opLog('Повторное наложение — попытка '+o.att)}
+  if(a==='reapp'){o.att++;o.appT=now();o.trAtApp=o.tr;opLog('Повторное наложение — попытка '+o.att)}
   if(a==='hard'){o.fail=true;opLog('Затруднение введения ложек / смыкания замка')}
   if(a==='born'){o.end=now();o.outcome='born';opLog('Головка родилась')}
   if(a==='cs'){o.end=now();o.outcome='cs';opLog('Неудача — переход к кесареву сечению')}
@@ -611,6 +668,7 @@ function renderOp(){
   const cl=$('#clock');cl.textContent=fmt(el);
   const al=[];
   if(o.start){
+    if(tool==='ve'&&!o.end&&o.appT&&o.tr===(o.trAtApp||0)){const w=now()-o.appT; if(w<120000) al.push([w<60000?'warn':'info',(w<60000?'Шиньон формируется: не тянуть ещё ':'Шиньон почти готов, до 2 мин осталось ')+fmt((w<60000?60000:120000)-w)])}
     if(tool==='ve'){ if(min>=20)al.push(['stop','20 минут — предел длительности ВЭП. Прекратить.']); else if(min>=15)al.push(['warn','15 минут: до предела 20 минут осталось '+fmt(20*60000-el)]); }
     if(o.tr>=3&&o.pr===0)al.push(['stop','3 тракции без опускания головки — не продолжать. КС.']);
     if(tool==='ve'&&o.slip>2)al.push(['stop','Соскальзывание более двух раз — критерий неуспеха.']);
@@ -620,7 +678,7 @@ function renderOp(){
     if(tool==='af'&&o.last&&!o.end){const s=(now()-o.last)/1000;al.push(['info','С последней тракции: '+fmt(now()-o.last)+(s<90?' (интервал 1,5–2 мин при удовлетворительном состоянии плода)':'')])}
   }
   cl.className='clock'+(al.some(a=>a[0]==='stop')?' stop':al.some(a=>a[0]==='warn')?' warn':'');
-  $('#clockSub').textContent=o.end?(o.outcome==='born'?'Головка родилась в '+hm(o.end):'Переход к КС в '+hm(o.end)):o.start?('Начало в '+hm(o.start)+(o.att>1?', попытка '+o.att:'')):'Нажмите «Начать», когда инструмент наложен';
+  $('#clockSub').textContent=o.end?(o.outcome==='born'?'Головка родилась в '+hm(o.end):'Переход к КС в '+hm(o.end)):o.start?('Начало в '+hm(o.start)+(o.att>1?', попытка '+o.att:'')):'Нажмите «Начать», когда чашечка наложена и создано разрежение';
   $('#opAlerts').innerHTML=al.map(a=>`<div class="alert ${a[0]}">${esc(a[1])}</div>`).join('');
   $('#cTr').textContent=o.tr;$('#cPr').textContent=o.pr;
   $('#cX').textContent=tool==='af'?o.att:o.slip;$('#cXl').textContent=tool==='af'?'попыток':'соскальзываний';
