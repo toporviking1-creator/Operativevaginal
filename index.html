@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A4E8A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ОВР">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Оперативные влагалищные роды — КР РОАГ 2023</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2F6;--card:#FFFFFF;--ink:#08131F;--ink2:#26364A;--line:#B9C5D3;--soft:#E3E9F0;
+  --acc:#0A4E8A;--acc-ink:#FFFFFF;--acc-bg:#DCEAF8;
+  --go:#0B5A30;--go-bg:#DDF2E5;--warn:#6A3F00;--warn-bg:#FFEDC2;--stop:#930E13;--stop-bg:#FBDDDD;
+  --ruler:#0A4E8A;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C141D;--card:#15212E;--ink:#F5F8FB;--ink2:#D3DDE8;--line:#3F5268;--soft:#1E2D3D;
+  --acc:#7DB8F2;--acc-ink:#06121F;--acc-bg:#16314D;
+  --go:#8BE3AE;--go-bg:#113524;--warn:#FFD27A;--warn-bg:#3A2A08;--stop:#FF9C9C;--stop-bg:#4A1215;--ruler:#7DB8F2;}}
+:root[data-theme="dark"]{
+  --bg:#0C141D;--card:#15212E;--ink:#F5F8FB;--ink2:#D3DDE8;--line:#3F5268;--soft:#1E2D3D;
+  --acc:#7DB8F2;--acc-ink:#06121F;--acc-bg:#16314D;
+  --go:#8BE3AE;--go-bg:#113524;--warn:#FFD27A;--warn-bg:#3A2A08;--stop:#FF9C9C;--stop-bg:#4A1215;--ruler:#7DB8F2;}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Onest,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-height:1.45;-webkit-text-size-adjust:100%;font-variant-numeric:tabular-nums}
+button,input,select,textarea{font:inherit;color:inherit}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--acc);color:var(--acc-ink);padding:10px 16px 8px}
+.top h1{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.top .src{font-size:13px;font-weight:500;opacity:1}
+.strip{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.pill{border-radius:999px;padding:3px 10px;font-size:13.5px;font-weight:700;background:rgba(255,255,255,.18);color:inherit;border:1.5px solid rgba(255,255,255,.55)}
+.pill.ok{background:#E1F5E8;color:#0B4A28;border-color:#E1F5E8}
+.pill.no{background:#FFE1E1;color:#7E0A0F;border-color:#FFE1E1}
+main{max-width:760px;margin:0 auto;padding:14px 12px 110px}
+.tab{display:none}.tab.on{display:block}
+section.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:14px 14px 16px;margin-bottom:12px}
+.card h2{font-size:17px;margin:0 0 4px;font-weight:800;display:flex;gap:10px;align-items:baseline}
+.card h2 .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--acc);color:var(--acc-ink);display:inline-grid;place-items:center;font-size:14px;transform:translateY(-1px)}
+.hint{color:var(--ink2);font-size:14px;margin:2px 0 10px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;background:var(--card)}
+.opt input{margin:3px 0 0;width:20px;height:20px;accent-color:var(--acc);flex:none}
+.opt:has(input:checked){border-color:var(--acc);background:var(--acc-bg)}
+.opt b{font-weight:700}
+.opt small{display:block;color:var(--ink2);font-size:13.5px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.seg label{padding:8px 12px;cursor:pointer;font-weight:600;font-size:15px;border-right:1.5px solid var(--line)}
+.seg label:last-child{border-right:0}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--acc);color:var(--acc-ink)}
+.seg label:has(input:focus-visible),.opt:has(input:focus-visible),.zone:has(input:focus-visible){outline:3px solid var(--acc);outline-offset:2px}
+input[type=text],input[type=time],textarea{border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--card);min-width:0}
+.calc{margin-top:8px;padding:10px 12px;border-radius:10px;background:var(--soft)}
+.calc .res{font-weight:700;margin-top:6px}
+/* ruler */
+.ruler{display:grid;grid-template-columns:62px 1fr;gap:0;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.zone{display:contents;cursor:pointer}
+.zone input{position:absolute;opacity:0;pointer-events:none}
+.zone .st{border-bottom:1.5px solid var(--line);border-right:3px solid var(--ruler);padding:10px 6px;text-align:right;font-weight:800;font-size:15px;color:var(--ink2);background:var(--soft)}
+.zone .zl{border-bottom:1.5px solid var(--line);padding:10px 12px}
+.zone:last-child .st,.zone:last-child .zl{border-bottom:0}
+.zone .zl b{display:block;font-size:15.5px}
+.zone .zl span{font-size:13.5px;color:var(--ink2)}
+.zone.spine .st{position:relative}
+.zone:has(input:checked) .st{background:var(--acc);color:var(--acc-ink)}
+.zone:has(input:checked) .zl{background:var(--acc-bg)}
+.marks{margin:10px 0 0;padding:10px 12px 10px 28px;border-left:4px solid var(--acc);background:var(--soft);border-radius:0 10px 10px 0;font-size:14.5px}
+.marks li{margin:2px 0}
+/* verdict */
+.verdict{border-radius:14px;padding:14px;border:2px solid var(--line);background:var(--card)}
+.verdict.go{background:var(--go-bg);border-color:var(--go);color:var(--ink)}
+.verdict.warn{background:var(--warn-bg);border-color:var(--warn)}
+.verdict.stop{background:var(--stop-bg);border-color:var(--stop)}
+.verdict .vt{font-size:22px;font-weight:800;line-height:1.2;margin:0 0 6px}
+.verdict.go .vt{color:var(--go)}.verdict.warn .vt{color:var(--warn)}.verdict.stop .vt{color:var(--stop)}
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+@media (max-width:520px){.vgrid{grid-template-columns:1fr}}
+.vbox{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+.vbox h3{margin:0 0 4px;font-size:15.5px}
+.vbox .s{font-weight:800}
+.vbox .s.ok{color:var(--go)}.vbox .s.no{color:var(--stop)}
+.vbox ul,.verdict ul{margin:4px 0 0;padding-left:18px;font-size:14.5px}
+.note{font-size:14px;color:var(--ink2);margin-top:8px}
+/* operation */
+.clock{font-size:64px;font-weight:800;text-align:center;letter-spacing:-.02em;line-height:1;margin:6px 0 2px}
+.clock.warn{color:var(--warn)}.clock.stop{color:var(--stop)}
+.sub{text-align:center;color:var(--ink2);font-size:14.5px}
+.counters{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.cnt{background:var(--soft);border-radius:10px;padding:8px;text-align:center}
+.cnt b{display:block;font-size:26px;font-weight:800}
+.cnt span{font-size:13px;color:var(--ink2)}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn{border:1.5px solid var(--line);border-radius:12px;padding:13px 10px;font-weight:700;font-size:15.5px;cursor:pointer;background:var(--card);text-align:center}
+.btn:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.btn.p{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.btn.g{background:var(--go-bg);border-color:var(--go);color:var(--go)}
+.btn.r{background:var(--stop-bg);border-color:var(--stop);color:var(--stop)}
+.btn.w{background:var(--warn-bg);border-color:var(--warn);color:var(--warn)}
+.btn.full{grid-column:1/-1}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.alerts{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.alert{border-radius:10px;padding:9px 12px;font-weight:700;font-size:15px}
+.alert.stop{background:var(--stop-bg);color:var(--stop);border:2px solid var(--stop)}
+.alert.warn{background:var(--warn-bg);color:var(--warn);border:2px solid var(--warn)}
+.alert.info{background:var(--acc-bg);color:var(--ink);border:1.5px solid var(--acc)}
+.log{margin:10px 0 0;padding:0;list-style:none;font-size:14.5px}
+.log li{padding:6px 0;border-top:1px solid var(--line);display:flex;gap:10px}
+.log time{font-weight:700;min-width:48px}
+/* ref */
+details{border:1.5px solid var(--line);border-radius:12px;background:var(--card);margin-bottom:8px}
+summary{padding:12px 14px;font-weight:800;cursor:pointer;font-size:16px}
+details[open] summary{border-bottom:1.5px solid var(--line)}
+details .in{padding:10px 14px 14px;font-size:15px}
+details .in h4{margin:12px 0 4px;font-size:15px}
+details .in p{margin:6px 0}
+details .in ul,details .in ol{margin:4px 0;padding-left:20px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{border:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+/* protocol */
+#protoText{width:100%;min-height:360px;font-size:14.5px;line-height:1.45;white-space:pre-wrap}
+/* nav */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1.5px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs button{background:none;border:0;padding:10px 2px 11px;font-weight:700;font-size:13px;color:var(--ink2);cursor:pointer;border-top:3px solid transparent}
+nav.tabs button .ic{display:block;font-size:19px;line-height:1.1}
+nav.tabs button.on{color:var(--acc);border-top-color:var(--acc)}
+nav.tabs button:focus-visible{outline:3px solid var(--acc);outline-offset:-3px}
+.toolbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px}
+.small{font-size:14px;padding:8px 12px}
+#printArea{display:none}
+@media print{
+  body{background:#fff;color:#000}
+  header.top,nav.tabs,main{display:none!important}
+  #printArea{display:block;font-family:Onest,Arial,sans-serif;font-size:12pt;color:#000}
+  #printArea h1{font-size:15pt;margin:0 0 4pt}
+  #printArea .pre{white-space:pre-wrap;line-height:1.4}
+  #printArea .sig{margin-top:22pt}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Оперативные влагалищные роды</h1>
+  <div class="src">КР РОАГ 2023 (ID 775), ВЭП и акушерские щипцы</div>
+  <div class="strip"><span class="pill" id="pVE">ВЭП: —</span><span class="pill" id="pAF">АЩ: —</span></div>
+</header>
+
+<main>
+<!-- ============ РЕШЕНИЕ ============ -->
+<div class="tab on" id="t-dec">
+  <div class="toolbar"><button class="btn small" id="resetAll">Новая пациентка</button></div>
+
+  <section class="card">
+    <h2><span class="n">1</span>Показание</h2>
+    <p class="hint">Можно отметить несколько.</p>
+    <div class="opts" data-group="ind">
+      <label class="opt"><input type="checkbox" name="ind" value="distress"><span><b>Дистресс плода</b><small>Острая или прогрессирующая хроническая гипоксия, самопроизвольно роды быстро не закончатся</small></span></label>
+      <label class="opt"><input type="checkbox" name="ind" value="weak"><span><b>Вторичная слабость родовой деятельности</b><small>Не поддаётся терапии окситоцином</small></span></label>
+      <label class="opt"><input type="checkbox" name="ind" value="prolonged"><span><b>Затянувшийся II период</b><small>При отсутствии эффекта от родостимуляции окситоцином</small></span></label>
+      <div class="calc" id="calcBox" hidden>
+        <div class="row" style="align-items:center">
+          <div class="seg"><label><input type="radio" name="par" value="p1">Первородящая</label><label><input type="radio" name="par" value="p2">Повторнородящая</label></div>
+          <div class="seg"><label><input type="radio" name="ea" value="y">С ЭА</label><label><input type="radio" name="ea" value="n">Без ЭА</label></div>
+        </div>
+        <div class="row" style="align-items:center;margin-top:8px"><span>Начало II периода</span><input type="time" name="t2" aria-label="Начало второго периода"></div>
+        <div class="res" id="calcRes"></div>
+      </div>
+      <label class="opt"><input type="checkbox" name="ind" value="nopushFull"><span><b>ЭГП: потуги необходимо выключить</b><small>По рекомендации смежных специалистов (показание к АЩ; метод обсудить антенатально)</small></span></label>
+      <label class="opt"><input type="checkbox" name="ind" value="nopushShort"><span><b>ЭГП: запланированное укорочение II периода</b><small>Длительные и сильные потуги противопоказаны (показание к ВЭП)</small></span></label>
+      <label class="opt"><input type="checkbox" name="ind" value="eclampsia"><span><b>Эклампсия во II периоде</b><small>Приступ при головке в узкой части и ниже</small></span></label>
+      <label class="opt"><input type="checkbox" name="ind" value="bleeding"><span><b>Кровотечение во II периоде</b><small>При головке в узкой части и ниже</small></span></label>
+      <label class="opt"><input type="checkbox" name="ind" value="fever"><span><b>Температура выше 38 °C</b><small>Хориоамнионит; затяжные роды при неэффективном лечении гипертермии</small></span></label>
+      <label class="opt"><input type="checkbox" name="ind" value="exhaustion"><span><b>Изнеможение, отказ пациентки тужиться</b></span></label>
+      <label class="opt"><input type="checkbox" name="ind" value="cs"><span><b>Затруднённое выведение головки при КС</b><small>Головка наибольшей окружностью выше разреза или низко в тазу</small></span></label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">2</span>Уровень головки</h2>
+    <p class="hint">Station — проводная точка относительно межостистой линии. Соответствие плоскостям ориентировочное (адаптированная классификация КР); решает влагалищное исследование. При сомнениях — УЗИ (ПГР/HPD, угол прогрессии).</p>
+    <div class="ruler">
+      <label class="zone"><input type="radio" name="level" value="above"><span class="st">≤ −3</span><span class="zl"><b>Малым сегментом во входе</b><span>Выше — влагалищные операции не выполняются</span></span></label>
+      <label class="zone"><input type="radio" name="level" value="inlet"><span class="st">−2…−1</span><span class="zl"><b>Большим сегментом во входе</b><span>Выше широкой части — противопоказано</span></span></label>
+      <label class="zone"><input type="radio" name="level" value="wide"><span class="st">0 / +1</span><span class="zl"><b>Широкая часть полости</b><span>RCOG: полостная средняя. Только ВЭП</span></span></label>
+      <label class="zone"><input type="radio" name="level" value="narrow"><span class="st">+2…+3</span><span class="zl"><b>Узкая часть полости</b><span>RCOG: полостная низкая. Промежности не достигает</span></span></label>
+      <label class="zone"><input type="radio" name="level" value="outlet"><span class="st">+4…+5</span><span class="zl"><b>Плоскость выхода</b><span>RCOG: выходная. Кости черепа на промежности, скальп виден без разведения губ</span></span></label>
+    </div>
+    <ul class="marks" id="marks" hidden></ul>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">3</span>Вставление и стреловидный шов</h2>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="pres" value="oa"><span><b>Затылочное, передний вид</b></span></label>
+      <label class="opt"><input type="radio" name="pres" value="op"><span><b>Затылочное, задний вид</b></span></label>
+      <label class="opt"><input type="radio" name="pres" value="anter"><span><b>Переднеголовное</b></span></label>
+      <label class="opt"><input type="radio" name="pres" value="face"><span><b>Лицевое</b></span></label>
+      <label class="opt"><input type="radio" name="pres" value="brow"><span><b>Лобное</b></span></label>
+      <label class="opt"><input type="radio" name="pres" value="breech"><span><b>Тазовое предлежание</b></span></label>
+    </div>
+    <p class="hint" style="margin-top:12px">Стреловидный шов</p>
+    <div class="seg" style="flex-wrap:wrap">
+      <label><input type="radio" name="sut" value="ap">Прямой</label>
+      <label><input type="radio" name="sut" value="obl">Косой ≤45°</label>
+      <label><input type="radio" name="sut" value="rot">Нужна ротация &gt;45°</label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">4</span>Противопоказания</h2>
+    <div class="row" style="align-items:center;margin-bottom:10px"><span>Срок беременности, нед</span><input type="text" name="ga" inputmode="decimal" placeholder="39,0" style="width:90px"></div>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="ctr" value="aut"><span><b>Анатомически узкий таз II–III ст. или клинически узкий таз</b></span></label>
+      <label class="opt"><input type="checkbox" name="ctr" value="noins"><span><b>Не удаётся определить уровень и характер вставления головки</b></span></label>
+      <label class="opt"><input type="checkbox" name="ctr" value="viral"><span><b>Активная вирусная инфекция у матери</b><small>Высокая вероятность повреждения кожи плода</small></span></label>
+      <label class="opt"><input type="checkbox" name="ctr" value="fbleed"><span><b>Риск кровотечения у плода</b><small>Тромбоцитопения, гемофилия, нарушение остеогенеза (для ВЭП)</small></span></label>
+      <label class="opt"><input type="checkbox" name="ctr" value="pushex"><span><b>Необходимо исключить потуги по состоянию роженицы</b><small>Для ВЭП</small></span></label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">5</span>Условия</h2>
+    <p class="hint">Все пункты обязательны.</p>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="cond" value="dil"><span><b>Полное открытие маточного зева</b></span></label>
+      <label class="opt"><input type="checkbox" name="cond" value="mem"><span><b>Плодный пузырь отсутствует</b></span></label>
+      <label class="opt"><input type="checkbox" name="cond" value="alive"><span><b>Живой плод</b><small>Аускультация перед операцией</small></span></label>
+      <label class="opt"><input type="checkbox" name="cond" value="cpd"><span><b>Соответствие размеров таза матери и головки</b></span></label>
+      <label class="opt"><input type="checkbox" name="cond" value="bladder"><span><b>Мочевой пузырь опорожнён</b><small>Манжета катетера сдута или катетер удалён</small></span></label>
+      <label class="opt"><input type="checkbox" name="cond" value="anal"><span><b>Обезболивание обеспечено (по показаниям)</b><small>При ЭА — пролонгировать</small></span></label>
+      <label class="opt"><input type="checkbox" name="cond" value="cs30"><span><b>Готовность к КС в течение 30 минут</b><small>Операционная, анестезиологи, неонатологи</small></span></label>
+      <label class="opt"><input type="checkbox" name="cond" value="consent"><span><b>Информированное добровольное согласие получено</b></span></label>
+    </div>
+  </section>
+
+  <section class="card" style="padding:0;border:0;background:none">
+    <div class="verdict" id="verdict"></div>
+  </section>
+  <button class="btn p full" id="toOp" style="width:100%">Перейти к операции</button>
+</div>
+
+<!-- ============ ОПЕРАЦИЯ ============ -->
+<div class="tab" id="t-op">
+  <section class="card">
+    <div class="row" style="justify-content:center">
+      <div class="seg"><label><input type="radio" name="tool" value="ve">Вакуум-экстракция</label><label><input type="radio" name="tool" value="af">Акушерские щипцы</label></div>
+    </div>
+    <div class="clock" id="clock">00:00</div>
+    <div class="sub" id="clockSub">Нажмите «Начать», когда инструмент наложен</div>
+    <div class="alerts" id="opAlerts"></div>
+    <div class="counters">
+      <div class="cnt"><b id="cTr">0</b><span>тракций</span></div>
+      <div class="cnt"><b id="cPr">0</b><span>с продвижением</span></div>
+      <div class="cnt"><b id="cX">0</b><span id="cXl">соскальзываний</span></div>
+    </div>
+    <div class="btns" id="opBtns"></div>
+    <ol class="log" id="log"></ol>
+  </section>
+  <section class="card">
+    <h2>Шпаргалка по ходу</h2>
+    <div id="opCheat" class="note" style="font-size:15px;color:var(--ink)"></div>
+  </section>
+</div>
+
+<!-- ============ ПОСЛЕ ============ -->
+<div class="tab" id="t-post">
+  <section class="card">
+    <h2>Антибиотикопрофилактика однократно</h2>
+    <p class="hint">УУР B, УДД 2 (ANODE).</p>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="abx" value="Цефазолин 1 г в/в медленно"><span><b>Цефазолин 1 г</b><small>в/в медленно</small></span></label>
+      <label class="opt"><input type="radio" name="abx" value="Цефуроксим 1,5 г в/в медленно"><span><b>Цефуроксим 1,5 г</b><small>в/в медленно</small></span></label>
+      <label class="opt"><input type="radio" name="abx" value="Амоксициллин + клавулановая кислота 1,2 г в/в медленно"><span><b>Амоксициллин + клавулановая кислота 1,2 г</b><small>в/в медленно</small></span></label>
+      <label class="opt"><input type="radio" name="abx" value="Ампициллин + сульбактам 1,5 г в/в медленно"><span><b>Ампициллин + сульбактам 1,5 г</b><small>в/в медленно</small></span></label>
+      <label class="opt"><input type="radio" name="abx" value="Эритромицин 250 мг внутрь (аллергия на пенициллины/цефалоспорины)"><span><b>Эритромицин 250 мг внутрь</b><small>При аллергии на пенициллины и/или цефалоспорины</small></span></label>
+    </div>
+  </section>
+  <section class="card">
+    <h2>После родоразрешения</h2>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="pck" value="kos"><span><b>Кровь из пуповины на КОС взята</b><small>При наличии возможности</small></span></label>
+      <label class="opt"><input type="checkbox" name="pck" value="vte"><span><b>Факторы риска ВТЭО оценены</b><small>По КР «Венозные осложнения во время беременности и послеродовом периоде»</small></span></label>
+      <label class="opt"><input type="checkbox" name="pck" value="exam"><span><b>Родовые пути осмотрены, разрывы ушиты</b></span></label>
+      <label class="opt"><input type="checkbox" name="pck" value="pelvic"><span><b>Рекомендованы упражнения для мышц тазового дна</b><small>Снижают недержание мочи (УУР A)</small></span></label>
+      <label class="opt"><input type="checkbox" name="pck" value="neo"><span><b>Новорождённый осмотрен неонатологом</b><small>Кефалогематома, субгалеальное кровоизлияние, кожа головы</small></span></label>
+    </div>
+    <p class="hint" style="margin-top:12px">Эпизиотомия</p>
+    <div class="seg" style="flex-wrap:wrap"><label><input type="radio" name="epi" value="none">Не выполнялась</label><label><input type="radio" name="epi" value="ml">Срединно-латеральная 60°</label></div>
+    <p class="hint" style="margin-top:12px">Дистоция плечиков</p>
+    <div class="seg"><label><input type="radio" name="sd" value="no">Нет</label><label><input type="radio" name="sd" value="yes">Была</label></div>
+  </section>
+  <section class="card">
+    <h2>Критерии качества КР</h2>
+    <div id="quality"></div>
+  </section>
+  <section class="card">
+    <h2>Код МКБ-10</h2>
+    <div id="icd"></div>
+  </section>
+</div>
+
+<!-- ============ ПРОТОКОЛ ============ -->
+<div class="tab" id="t-proto">
+  <section class="card">
+    <h2>Протокол и обоснование</h2>
+    <p class="hint">Текст собирается из всех вкладок. Можно править вручную перед копированием. Ф.И.О. и номер истории остаются пустыми графами для печати.</p>
+    <textarea id="protoText" aria-label="Текст протокола"></textarea>
+    <div class="btns" style="margin-top:10px">
+      <button class="btn p" id="copyBtn">Скопировать</button>
+      <button class="btn" id="printBtn">Печать / PDF</button>
+      <button class="btn full small" id="regenBtn">Пересобрать текст</button>
+    </div>
+    <div class="note" id="copyNote"></div>
+  </section>
+</div>
+
+<!-- ============ СПРАВКА ============ -->
+<div class="tab" id="t-ref">
+  <details open><summary>Классификация: RCOG и адаптация КР</summary><div class="in"><div class="tw"><table>
+    <tr><th>RCOG 2020</th><th>Адаптация КР для РФ</th></tr>
+    <tr><td><b>Выходная.</b> Скальп виден без разведения губ, череп достиг промежности, ротация ≤45°</td><td><b>Выходная.</b> Кости черепа достигли промежности. Стреловидный шов в прямом или косом размере (≤45°)</td></tr>
+    <tr><td><b>Полостная низкая.</b> Station +2, промежности не достигает. Неротационная ≤45° или ротационная &gt;45°</td><td><b>Узкая часть полости.</b> Проводная точка +2, промежности не достигает. Шов в косом размере (≤45°)</td></tr>
+    <tr><td><b>Полостная средняя.</b> Над лоном ≤1/5 головки, station 0 или +1</td><td><b>Широкая часть полости.</b> Station 0 или +1 (не выше остей). Шов в косом размере</td></tr>
+  </table></div>
+  <p>Когда наибольшая окружность на station 0, проводная точка на +2 — это узкая часть по российской терминологии. Ротационные щипцы в РФ не распространены, их применяют только врачи с достаточным опытом.</p></div></details>
+
+  <details><summary>Опознавательные ориентиры таза (Прил. Б)</summary><div class="in" id="refMarks"></div></details>
+
+  <details><summary>Техника ВЭП</summary><div class="in">
+    <ol>
+      <li>Двумя пальцами сместить заднюю спайку, чашечку взять «как писчее перо», ввести внутренней стороной к головке.</li>
+      <li>Чашечка на проводную точку, стреловидный шов делит её пополам. От края чашечки до заднего края большого родничка около 3 см. Так сохраняются сгибание и синклитизм.</li>
+      <li>Разрежение до границы зелёной и красной зон, обычно 500–600 мм рт. ст. (0,8–0,9 bar), по инструкции производителя.</li>
+      <li>Перед тракциями убедиться, что под чашечку не попали мягкие ткани.</li>
+      <li>Тракции синхронно с потугой, по кривизне таза. В 76–96% достаточно 4 потуг. Операция не дольше 20 минут.</li>
+    </ol>
+    <h4>Руки</h4>
+    <p>Тянущая: концевые фаланги 2 пальцев (головка в выходе) или 4 пальцев (в полости) на ручке, предплечье продолжает тросик. Контролирующая: большой палец на чашечке прижимает её к головке, указательный на головке у края чашечки. Она оценивает продвижение, предотвращает соскальзывание, контролирует поворот.</p>
+    <h4>Направление тракций (относительно стоящей женщины)</h4>
+    <ul>
+      <li><b>Широкая часть, передний вид:</b> кзади до проведения большого сегмента через узкую часть, книзу до подведения подзатылочной ямки к нижнему краю симфиза, затем кпереди.</li>
+      <li><b>Узкая часть:</b> кзади, затем книзу до касания подзатылочной ямкой симфиза, затем кпереди.</li>
+      <li><b>Выход, передний вид:</b> если подзатылочная ямка у нижнего края симфиза — только кпереди; если чуть выше — книзу, потом кпереди.</li>
+      <li><b>Выход, задний вид:</b> книзу до упора переднего края большого родничка в нижний край лона (1-я точка фиксации), кпереди до фиксации подзатылочной ямки у верхушки копчика (2-я точка), затем кзади — рождаются лоб, лицо, подбородок.</li>
+      <li><b>Переднеголовное, большой сегмент в широкой части:</b> кзади до подведения середины лба к симфизу, резко кпереди до подведения затылочного бугра к крестцово-копчиковому сочленению, затем книзу и кзади.</li>
+    </ul>
+    <p>После рождения головки сбросить давление кнопкой, туловище выводить обычными приёмами.</p>
+    <h4>Критерии неуспеха</h4>
+    <ul>
+      <li>Нет продвижения при правильной чашечке, умеренной силе и направлении по оси.</li>
+      <li>Опускания нет в течение трёх тракций. Общая длительность не более 20 минут.</li>
+      <li>Соскальзывание более двух раз при правильном направлении и максимальном разрежении.</li>
+    </ul>
+    <p>Каждое наложение — отдельная попытка.</p>
+  </div></details>
+
+  <details><summary>Техника акушерских щипцов</summary><div class="in">
+    <p>Этапы: уточнение ситуации, складывание ложек, введение ложек, замыкание замка, пробная тракция, тракции, снятие.</p>
+    <h4>Три тройных правила</h4>
+    <ol>
+      <li><b>«Три слева — три справа».</b> Левая ложка левой рукой в левую сторону таза, правая — правой в правую.</li>
+      <li><b>Введение и расположение.</b> Ложки направлены к проводной точке; лежат бипариетально, захватывая головку по наибольшей периферии за теменными буграми; проводная точка и ось головки в плоскости замка.</li>
+      <li><b>«Три позиции — три тракции».</b> Широкая часть — кзади, вниз, кпереди; узкая — вниз и кпереди; выход — кпереди.</li>
+    </ol>
+    <h4>Проверка наложения</h4>
+    <ul>
+      <li>Малый родничок посередине между ложками.</li>
+      <li>Малый родничок в 1,5 см от плоскости щипцов у замка, иначе тракции разогнут головку.</li>
+      <li>Стреловидный шов перпендикулярен замку.</li>
+      <li>Пробная тракция: указательный палец левой руки на головке, положение сохраняется — щипцы наложены правильно.</li>
+    </ul>
+    <h4>Направление тракций</h4>
+    <ul>
+      <li>Широкая или узкая часть — кзади (при широкой — пока большой сегмент не дойдёт до прямого размера узкой части, верхушки остей перестают пальпироваться).</li>
+      <li>Большой сегмент между узкой частью и выходом — книзу, пока подзатылочная ямка не окажется у нижнего края симфиза (около 7 см от проводной точки по головке).</li>
+      <li>Выход — кпереди при переднем виде; кзади при заднем виде и переднеголовном.</li>
+    </ul>
+    <p>При удовлетворительном состоянии плода тракции в режиме потуг по 30–60 с с интервалом 1,5–2 мин, операция 3–8 минут. При страдании плода — максимально быстро. Ложки снимать после рождения головки.</p>
+    <h4>Критерии неуспеха</h4>
+    <ul>
+      <li>Затруднено введение ложек или смыкание замка.</li>
+      <li>Нет продвижения при правильном наложении, умеренной силе и направлении по оси.</li>
+      <li>Опускания нет в течение трёх тракций.</li>
+    </ul>
+    <p>При неудаче — кесарево сечение.</p>
+  </div></details>
+
+  <details><summary>ВЭ и АЩ при кесаревом сечении</summary><div class="in">
+    <h4>Вакуум-экстрактор</h4>
+    <p>Определить положение головки. Чашечку на лицо и ухо не ставить. Высоко — над затылком; низко — подтянуть головку рукой вдоль разреза и установить над затылком. Стандартное разрежение, проверить, что ткани не попали под чашечку, извлечь через разрез. После рождения головки сбросить разрежение и снять чашечку, затем выводить плечики.</p>
+    <h4>Щипцы</h4>
+    <p>Одна или обе ложки. Головка низко: ложку, одноимённую позиции (прилегающую к задней стенке матки), ввести и движением кпереди с давлением на дно матки вывести головку. Головка выше разреза: ложки на височно-скуловые области от затылка к подбородку перед ушными раковинами, ассистент фиксирует головку, замкнуть, подвести к разрезу и вывести.</p>
+    <p>Внешнее давление при высокой головке повышает риск травмы плода и матки.</p>
+  </div></details>
+
+  <details><summary>Обезболивание</summary><div class="in">
+    <p>Рассмотреть обезболивание перед операцией (УУР A). Лучшего метода не доказано. При имеющейся нейроаксиальной аналгезии — пролонгировать: ропивакаин, бупивакаин, лидокаин, левобупивакаин.</p>
+    <p>Общая анестезия: преоксигенация 100% O₂ 3 минуты. Тиопентал натрия 4–5 мг/кг в/в или пропофол не выше 2,5 мг/кг. При кровотечении — кетамин 1 мг/кг. Поддержание: N₂O/O₂ 50:50 или галогенсодержащие до 1,5 об.%.</p>
+  </div></details>
+
+  <details><summary>Последовательное применение ВЭП и АЩ</summary><div class="in">
+    <p><b>Рутинно не рекомендуется.</b> Относительный риск выше суммы рисков каждого инструмента. По сравнению с одним инструментом: разрыв анального сфинктера 17,4% против 8,4%, pH артерии пуповины &lt;7,10 — 13,8% против 5,0%. Возможно только в отдельных случаях при взвешенной оценке рисков относительно экстренного КС.</p>
+  </div></details>
+
+  <details><summary>Осложнения</summary><div class="in"><div class="tw"><table>
+    <tr><th colspan="2">Мать</th></tr>
+    <tr><td>Разрыв влагалища/промежности</td><td>10–20%</td></tr>
+    <tr><td>Разрыв промежности III–IV ст.</td><td>1–4% … 8–12%</td></tr>
+    <tr><td>Послеродовое кровотечение</td><td>10–40%</td></tr>
+    <tr><td>Недержание кала или мочи</td><td>редко</td></tr>
+    <tr><th colspan="2">Плод / новорождённый</th></tr>
+    <tr><td>Кефалогематома</td><td>1–12%</td></tr>
+    <tr><td>Повреждение кожи головы или лица</td><td>10%</td></tr>
+    <tr><td>Ретинальное кровоизлияние</td><td>17–38%</td></tr>
+    <tr><td>Гипербилирубинемия</td><td>5–15%</td></tr>
+    <tr><td>Субгалеальное кровоизлияние</td><td>0,3–0,6%</td></tr>
+    <tr><td>Внутричерепное кровоизлияние</td><td>0,05–0,15%</td></tr>
+    <tr><td>Спинальная травма, перелом черепа, паралич лицевого нерва</td><td>редко</td></tr>
+  </table></div>
+  <p>Дистоция плечиков: АЩ до 3,1%, ВЭП 2,7% — действовать по КР «Затруднённые роды вследствие предлежания плечика».</p>
+  <p>ВЭП чаще заканчивается неудачей, АЩ чаще травмируют промежность. Рутинная эпизиотомия повышает риск повреждения сфинктера; у первородящих при АЩ эпизиотомия может снижать риск разрывов III–IV ст. Решение — по клинике и с согласия роженицы.</p>
+  </div></details>
+
+  <details><summary>Для разговора с пациенткой (Прил. В)</summary><div class="in">
+    <p>Оперативные влагалищные роды — врач помогает ребёнку родиться с помощью вакуум-экстрактора или щипцов. Причины: сердцебиение ребёнка говорит, что ему тяжело переносить роды; ребёнок не продвигается, несмотря на схватки; другие медицинские причины.</p>
+    <p>Перед процедурой врач осмотрит живот и проведёт влагалищное исследование, при необходимости добавит обезболивание и опорожнит мочевой пузырь катетером.</p>
+    <p>Вакуумная чашка может оставить временную припухлость на голове (шиньон), проходит за несколько дней. Щипцы могут оставить отметины, исходят за 1–2 дня. При родах присутствует неонатолог.</p>
+    <p>В следующих родах помощь чаще всего не требуется, хотя риск повторных оперативных родов выше (4,7% против 1,2%), КС — 8,5% против 4,6%.</p>
+  </div></details>
+
+  <details><summary>Коды МКБ-10</summary><div class="in"><div class="tw"><table>
+    <tr><td>O66.5</td><td>Неудачная попытка ВЭ или щипцов (с последующим АЩ или КС)</td></tr>
+    <tr><td>O81.0</td><td>Низкие (выходные) щипцы</td></tr>
+    <tr><td>O81.1</td><td>Средние (полостные) щипцы</td></tr>
+    <tr><td>O81.2</td><td>Средние (полостные) щипцы с поворотом</td></tr>
+    <tr><td>O81.3</td><td>Другие и неуточнённые щипцы</td></tr>
+    <tr><td>O81.4</td><td>Применение вакуум-экстрактора</td></tr>
+    <tr><td>O81.5</td><td>Комбинированное применение щипцов и ВЭ</td></tr>
+  </table></div></div></details>
+  <p class="note">Источник: КР «Оперативные влагалищные роды», РОАГ, 2023, ID 775. Приложение — вспомогательный инструмент, не заменяет клиническое решение врача.</p>
+</div>
+</main>
+
+<nav class="tabs" role="tablist">
+  <button data-t="t-dec" class="on"><span class="ic">✓</span>Решение</button>
+  <button data-t="t-op"><span class="ic">⏱</span>Операция</button>
+  <button data-t="t-post"><span class="ic">💉</span>После</button>
+  <button data-t="t-proto"><span class="ic">📄</span>Протокол</button>
+  <button data-t="t-ref"><span class="ic">📖</span>Справка</button>
+</nav>
+
+<div id="printArea"></div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const LS='ovr-kr2023-v1';
+const fresh=()=>({ind:[],level:'',pres:'',sut:'',ga:'',ctr:[],cond:[],par:'',ea:'',t2:'',tool:'',abx:'',pck:[],epi:'',sd:'',
+  op:{start:null,end:null,outcome:'',tr:0,pr:0,slip:0,att:1,fail:false,tools:[],log:[]}, protoEdited:false});
+let S; try{S=JSON.parse(localStorage.getItem(LS))||fresh()}catch(e){S=fresh()}
+S=Object.assign(fresh(),S); S.op=Object.assign(fresh().op,S.op||{});
+const save=()=>{try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}};
+
+const IND={distress:'дистресс плода (острая/прогрессирующая гипоксия), самопроизвольное завершение родов в ближайшее время невозможно',
+ weak:'вторичная слабость родовой деятельности, не поддающаяся терапии окситоцином',
+ prolonged:'затянувшийся второй период родов при отсутствии эффекта от родостимуляции окситоцином',
+ nopushFull:'экстрагенитальная патология, при которой необходимо выключить потуги',
+ nopushShort:'экстрагенитальная патология, требующая запланированного укорочения II периода (длительные и сильные потуги противопоказаны)',
+ eclampsia:'эклампсия во втором периоде родов',bleeding:'кровотечение во втором периоде родов',
+ fever:'температура выше 38 °C (хориоамнионит / затяжные роды при неэффективном лечении гипертермии)',
+ exhaustion:'изнеможение, отказ пациентки тужиться',cs:'затруднённое выведение головки плода при кесаревом сечении'};
+const LV={above:{t:'малым сегментом во входе в малый таз',rc:'—',m:['Над лоном определяется бо́льшая часть головки','Определяются средняя и нижняя часть лонной кости','Мыс (если достигается) — только обойдя головку согнутым пальцем','Головка фиксирована во входе']},
+ inlet:{t:'большим сегментом во входе в малый таз',rc:'—',m:['Бо́льшая часть головки не определяется','Определяются нижний и средний край лонной кости','Достигается нижняя часть крестцовой впадины (IV–V позвонки)','Седалищные ости определяются']},
+ wide:{t:'в широкой части полости малого таза (station 0/+1)',rc:'полостная средняя',m:['Снаружи определяется только шейно-плечевая область','Достигается только нижний край лобковой кости','Достигается только нижняя часть крестцовой впадины (IV–V позвонки)','Седалищные ости определяются']},
+ narrow:{t:'в узкой части полости малого таза (station +2, промежности не достигает)',rc:'полостная низкая',m:['Над лоном головка не определяется, только шейно-затылочная область','Лонная и крестцовая кости не достигаются','С трудом достигается крестцово-копчиковое соединение','Седалищные ости не определяются','Стреловидный шов в косом размере, ближе к прямому']},
+ outlet:{t:'в плоскости выхода малого таза',rc:'выходная',m:['Головкой выполнена вся крестцовая впадина','Седалищные ости, крестцово-копчиковое сочленение и лобковая кость не достигаются']}};
+const PR={oa:'затылочное вставление, передний вид',op:'затылочное вставление, задний вид',anter:'переднеголовное вставление',face:'лицевое предлежание',brow:'лобное предлежание',breech:'тазовое предлежание'};
+const SUT={ap:'в прямом размере',obl:'в косом размере (≤45°)',rot:'требуется ротация >45°'};
+const COND={dil:'полное открытие маточного зева',mem:'отсутствие плодного пузыря',alive:'живой плод',cpd:'соответствие размеров таза матери и головки плода',bladder:'опорожнённый мочевой пузырь',anal:'обезболивание (по показаниям)',cs30:'готовность выполнить КС в течение 30 минут',consent:'информированное добровольное согласие'};
+const CTR={aut:'анатомически узкий таз II–III ст. / клинически узкий таз',noins:'невозможно определить уровень и характер вставления головки',viral:'активная вирусная инфекция у матери',fbleed:'риск кровотечения у плода (тромбоцитопения, гемофилия, нарушение остеогенеза)',pushex:'необходимость исключить потуги'};
+
+/* ---------- restore inputs ---------- */
+function restore(){
+  $$('input[name]').forEach(el=>{
+    const k=el.name; if(!(k in S))return; const v=S[k];
+    if(el.type==='checkbox') el.checked=Array.isArray(v)&&v.includes(el.value);
+    else if(el.type==='radio') el.checked=v===el.value;
+    else el.value=v||'';
+  });
+}
+document.addEventListener('change',e=>{
+  const el=e.target; if(!el.name||!(el.name in S))return;
+  if(el.type==='checkbox'){S[el.name]=$$(`input[name="${el.name}"]:checked`).map(x=>x.value)}
+  else S[el.name]=el.value;
+  if(el.name==='tool'&&S.op.start&&!S.op.end){opLog('Смена инструмента на '+(el.value==='ve'?'ВЭП':'АЩ'));if(!S.op.tools.includes(el.value))S.op.tools.push(el.value)}
+  S.protoEdited=false; save(); refresh();
+});
+document.addEventListener('input',e=>{const el=e.target;if((el.name==='ga'||el.name==='t2')){S[el.name]=el.value;save();refresh()}});
+
+/* ---------- evaluation ---------- */
+function evalS(){
+  const I=new Set(S.ind),C=new Set(S.ctr),K=new Set(S.cond);
+  const lv=S.level,pr=S.pres,ga=parseFloat(String(S.ga||'').replace(',','.'));
+  const ve=[],af=[],notes=[];
+  ['aut','noins','viral'].forEach(k=>{if(C.has(k)){ve.push(CTR[k]);af.push(CTR[k])}});
+  if(C.has('fbleed'))ve.push(CTR.fbleed);
+  if(C.has('pushex')||I.has('nopushFull'))ve.push('необходимость исключить потуги');
+  if(!isNaN(ga)){ if(ga<34)ve.push('срок менее 34 недель'); else if(ga<37)notes.push('Срок 34–36 нед: ВЭП допустима.'); }
+  if(lv==='above'||lv==='inlet'){ve.push('головка выше широкой части полости');af.push('головка выше узкой части полости')}
+  if(lv==='wide')af.push('головка выше узкой части полости');
+  if(pr==='breech'){ve.push('тазовое предлежание');af.push('тазовое предлежание')}
+  if(pr==='brow'){ve.push('лобное предлежание');af.push('лобное предлежание')}
+  if(pr==='face')ve.push('лицевое предлежание');
+  if(I.has('distress')&&lv&&lv!=='outlet')ve.push('дистресс плода при головке выше плоскости выхода');
+  if(S.sut==='rot')notes.push('Ротация >45°: ротационные щипцы в РФ не распространены — только при достаточном опыте врача.');
+  if(pr==='op')notes.push('Задний вид: особое направление тракций — см. «Справку».');
+  const miss=Object.keys(COND).filter(k=>!K.has(k));
+  const veOK=!ve.length,afOK=!af.length;
+  let tone='idle',title='',text='',ref='';
+  const avail=[veOK&&'ВЭП',afOK&&'АЩ'].filter(Boolean);
+  const afInd=['eclampsia','bleeding','fever','exhaustion','nopushFull'].filter(k=>I.has(k));
+  if(!I.size){title='Выберите показание';text='Затем уровень головки, вставление и условия.'}
+  else if(I.has('cs')&&I.size===1){tone='go';title='ВЭ или АЩ при кесаревом сечении';text='При затруднённом выведении головки безопаснее ВЭ или АЩ, чем внешнее давление (УУР C). Техника — во вкладке «Справка».'}
+  else if(!lv){title='Укажите уровень головки'}
+  else if(!pr){title='Укажите вставление'}
+  else if(!veOK&&!afOK){tone='stop';title='Кесарево сечение';text='Оба метода противопоказаны.'}
+  else if(I.has('distress')){
+    if(lv==='wide'){tone='stop';title='Кесарево сечение';text='При быстро прогрессирующем нарушении состояния плода и головке в широкой части КР рекомендует КС: минимальный интервал «диагноз — рождение».'}
+    else if(lv==='narrow'){ if(afOK){tone='go';title='Акушерские щипцы';text='При дистрессе и головке в узкой части предпочтительны АЩ; ВЭП противопоказана выше плоскости выхода.'} else {tone='stop';title='Кесарево сечение';text='АЩ противопоказаны, ВЭП при дистрессе выше плоскости выхода противопоказана.'} }
+    else {tone='go';title=avail.join(' или ');text='Головка в выходе: при дистрессе допустимы АЩ или ВЭП — по опыту врача, максимально бережно и быстро.'}
+  }
+  else if(afInd.length){
+    const lab=afInd.map(k=>IND[k].split(' (')[0]).join('; ');
+    if(lv!=='wide'){ if(afOK){tone='go';title='Акушерские щипцы';text='По Прил. Б показание отнесено к АЩ: '+lab+'.'+(veOK&&!afInd.includes('nopushFull')?' ВЭП не противопоказана.':'')} else if(veOK){tone='warn';title='ВЭП';text='АЩ противопоказаны; ВЭП допустима с учётом показания: '+lab+'.'} else {tone='stop';title='Кесарево сечение'} }
+    else { if((I.has('eclampsia')||I.has('bleeding'))){tone='stop';title='Кесарево сечение';text='По КР АЩ при эклампсии и кровотечении во II периоде — при головке в узкой части и ниже.'} else if(veOK){tone='warn';title='ВЭП или КС — взвесить';text='Головка в широкой части: АЩ противопоказаны. ВЭП допустима, но сравните риски с КС во II периоде.'} else {tone='stop';title='Кесарево сечение'} }
+  }
+  else if(I.has('weak')||I.has('prolonged')||I.has('nopushShort')){
+    if(lv==='wide'){ if(veOK){tone='warn';title='ВЭП или КС — взвесить';text='Station 0/+1: КС во II периоде при низкой головке — больше кровотечений и переводов новорождённого в ОРИТН; влагалищная операция — больше дисфункции тазового дна и травмы плода.'} else {tone='stop';title='Кесарево сечение'} }
+    else {tone='go';title=avail.join(' или ');text=I.has('nopushShort')?'Укорочение II периода при ЭГП — показание к ВЭП.':'Выбор по клинической ситуации и опыту врача.'}
+  }
+  else {tone='go';title=avail.join(' или ')}
+  if(avail.length===2&&tone!=='stop')notes.push('ВЭП чаще заканчивается неудачей, АЩ чаще травмируют промежность.');
+  if(miss.length&&(tone==='go'||tone==='warn')){tone='warn';title='Условия не соблюдены. '+title}
+  return {ve,af,veOK,afOK,notes,miss,tone,title,text,avail};
+}
+
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function renderDecision(){
+  const r=evalS();
+  $('#calcBox').hidden=!S.ind.includes('prolonged');
+  // calc
+  let cr='';
+  if(S.par&&S.ea){const lim={p1y:4,p2y:3,p1n:3,p2n:2}[S.par+S.ea];cr='Порог: более '+lim+' ч.';
+    if(S.t2){const [h,m]=S.t2.split(':').map(Number);const n=new Date();let d=(n.getHours()*60+n.getMinutes())-(h*60+m);if(d<0)d+=1440;
+      cr+=' Сейчас: '+Math.floor(d/60)+' ч '+String(d%60).padStart(2,'0')+' мин — '+(d>lim*60?'превышен':'ещё не превышен')+'.'}}
+  $('#calcRes').textContent=cr||'Выберите паритет и наличие ЭА.';
+  // marks
+  const mk=$('#marks'); if(S.level){mk.hidden=false;mk.innerHTML=LV[S.level].m.map(x=>'<li>'+esc(x)+'</li>').join('')}else mk.hidden=true;
+  // verdict
+  const v=$('#verdict'); v.className='verdict '+(r.tone==='idle'?'':r.tone);
+  const box=(n,ok,list)=>`<div class="vbox"><h3>${n}</h3><div class="s ${ok?'ok':'no'}">${ok?'Допустима':'Противопоказана'}</div>${list.length?'<ul>'+list.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':''}</div>`;
+  let h=`<div class="vt">${esc(r.title||'—')}</div>${r.text?'<div>'+esc(r.text)+'</div>':''}`;
+  if(r.miss.length&&S.ind.length&&!(S.ind.length===1&&S.ind[0]==='cs'))h+=`<div class="note" style="color:var(--ink)"><b>Не отмечено:</b> ${r.miss.map(k=>COND[k]).join(', ')}.</div>`;
+  if(S.level&&S.pres&&!(S.ind.length===1&&S.ind[0]==='cs'))h+=`<div class="vgrid">${box('Вакуум-экстракция',r.veOK,r.ve)}${box('Акушерские щипцы',r.afOK,r.af.map(x=>x==='тазовое предлежание'||x==='лобное предлежание'?x:x))}</div>`;
+  if(r.notes.length)h+='<ul>'+r.notes.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
+  v.innerHTML=h;
+  // pills
+  const pv=$('#pVE'),pa=$('#pAF'),ready=S.level&&S.pres;
+  pv.className='pill'+(ready?(r.veOK?' ok':' no'):'');pa.className='pill'+(ready?(r.afOK?' ok':' no'):'');
+  pv.textContent='ВЭП: '+(ready?(r.veOK?'можно':'нельзя'):'—');pa.textContent='АЩ: '+(ready?(r.afOK?'можно':'нельзя'):'—');
+  return r;
+}
+
+/* ---------- operation ---------- */
+let tick=null;
+const now=()=>Date.now();
+const fmt=ms=>{const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+const hm=t=>{const d=new Date(t);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
+function opLog(txt){S.op.log.push({t:now(),txt});save()}
+function opAct(a){
+  const o=S.op,tool=S.tool;
+  if(a==='start'){if(!tool){alert('Выберите инструмент');return}Object.assign(o,fresh().op,{start:now(),tools:[tool]});opLog((tool==='ve'?'Чашечка ВЭ наложена':'Ложки щипцов наложены')+', начало операции')}
+  if(!o.start)return;
+  if(a==='trP'){o.tr++;o.pr++;o.last=now();opLog('Тракция '+o.tr+': продвижение есть')}
+  if(a==='trN'){o.tr++;o.last=now();opLog('Тракция '+o.tr+': продвижения нет')}
+  if(a==='trial'){opLog('Пробная тракция: наложение правильное')}
+  if(a==='slip'){o.slip++;opLog('Соскальзывание чашечки ('+o.slip+')');}
+  if(a==='reapp'){o.att++;opLog('Повторное наложение — попытка '+o.att)}
+  if(a==='hard'){o.fail=true;opLog('Затруднение введения ложек / смыкания замка')}
+  if(a==='born'){o.end=now();o.outcome='born';opLog('Головка родилась')}
+  if(a==='cs'){o.end=now();o.outcome='cs';opLog('Неудача — переход к кесареву сечению')}
+  if(a==='reset'){if(!confirm('Сбросить операцию?'))return;S.op=fresh().op}
+  S.protoEdited=false;save();refresh();
+}
+function renderOp(){
+  const o=S.op,tool=S.tool,el=o.start?((o.end||now())-o.start):0,min=el/60000;
+  const cl=$('#clock');cl.textContent=fmt(el);
+  const al=[];
+  if(o.start){
+    if(tool==='ve'){ if(min>=20)al.push(['stop','20 минут — предел длительности ВЭП. Прекратить.']); else if(min>=15)al.push(['warn','15 минут: до предела 20 минут осталось '+fmt(20*60000-el)]); }
+    if(o.tr>=3&&o.pr===0)al.push(['stop','3 тракции без опускания головки — не продолжать. КС.']);
+    if(tool==='ve'&&o.slip>2)al.push(['stop','Соскальзывание более двух раз — критерий неуспеха.']);
+    if(o.fail)al.push(['stop','Затруднение введения ложек или смыкания замка — критерий неуспеха.']);
+    if(o.tools.length>1)al.push(['warn','Последовательное применение ВЭП и АЩ рутинно не рекомендуется: только при взвешенной оценке рисков против экстренного КС.']);
+    if(tool==='ve'&&o.tr>=4&&o.pr>0&&!o.end)al.push(['info','В 76–96% случаев достаточно 4 потуг.']);
+    if(tool==='af'&&o.last&&!o.end){const s=(now()-o.last)/1000;al.push(['info','С последней тракции: '+fmt(now()-o.last)+(s<90?' (интервал 1,5–2 мин при удовлетворительном состоянии плода)':'')])}
+  }
+  cl.className='clock'+(al.some(a=>a[0]==='stop')?' stop':al.some(a=>a[0]==='warn')?' warn':'');
+  $('#clockSub').textContent=o.end?(o.outcome==='born'?'Головка родилась в '+hm(o.end):'Переход к КС в '+hm(o.end)):o.start?('Начало в '+hm(o.start)+(o.att>1?', попытка '+o.att:'')):'Нажмите «Начать», когда инструмент наложен';
+  $('#opAlerts').innerHTML=al.map(a=>`<div class="alert ${a[0]}">${esc(a[1])}</div>`).join('');
+  $('#cTr').textContent=o.tr;$('#cPr').textContent=o.pr;
+  $('#cX').textContent=tool==='af'?o.att:o.slip;$('#cXl').textContent=tool==='af'?'попыток':'соскальзываний';
+  const on=o.start&&!o.end;
+  let b='';
+  if(!o.start||o.end)b+=`<button class="btn p full" data-a="start">Начать</button>`;
+  if(on){
+    b+=`<button class="btn g" data-a="trP">Тракция: есть продвижение</button><button class="btn w" data-a="trN">Тракция: нет продвижения</button>`;
+    b+=tool==='ve'?`<button class="btn" data-a="slip">Соскальзывание</button>`:`<button class="btn" data-a="trial">Пробная тракция ОК</button><button class="btn" data-a="hard">Не вводятся ложки / замок</button>`;
+    b+=`<button class="btn" data-a="reapp">Повторное наложение</button><button class="btn p" data-a="born">Головка родилась</button><button class="btn r" data-a="cs">Неудача → КС</button>`;
+  }
+  if(o.start)b+=`<button class="btn full small" data-a="reset">Сбросить операцию</button>`;
+  $('#opBtns').innerHTML=b;
+  $('#log').innerHTML=o.log.slice().reverse().map(l=>`<li><time>${hm(l.t)}</time><span>${esc(l.txt)}</span></li>`).join('');
+  const lv=S.level,pr=S.pres,ev=evalS();
+  const LVS={wide:'широкая часть',narrow:'узкая часть',outlet:'выход'},NA='<p class="alert warn" style="margin:8px 0">Отдельной схемы тракций для этого сочетания в КР нет — ориентируйтесь на биомеханизм родов и собственный опыт.</p>';
+  let ch='';
+  if(lv&&pr)ch+=`<p style="margin-top:0"><b>Ситуация:</b> ${esc(LVS[lv]||LV[lv].t)}, ${esc(PR[pr])}.</p>`;
+  else ch+='<p style="margin-top:0">Укажите уровень головки и вставление во вкладке «Решение».</p>';
+  if(tool==='ve'&&lv&&pr&&!ev.veOK)ch+=`<div class="alert stop" style="margin:8px 0">ВЭП противопоказана: ${esc(ev.ve.join('; '))}.</div>`;
+  if(tool==='af'&&lv&&pr&&!ev.afOK)ch+=`<div class="alert stop" style="margin:8px 0">АЩ противопоказаны: ${esc(ev.af.join('; '))}.</div>`;
+  if(tool==='ve'){
+    ch+='<p>Разрежение 500–600 мм рт. ст. (0,8–0,9 bar). Центр чашечки на проводной точке, стреловидный шов делит чашечку пополам, до заднего края большого родничка около 3 см (КР описывает установку для переднего вида). Проверить, что ткани не попали под чашечку.</p>';
+    let t='';
+    if(pr==='oa'){t={wide:'<b>Тракции:</b> кзади, пока большой сегмент не пройдёт узкую часть, затем книзу, пока подзатылочная ямка не подойдёт к нижнему краю симфиза, затем кпереди, разгибая головку.',
+      narrow:'<b>Тракции:</b> кзади (ости выше продольного размера), затем книзу, пока подзатылочная ямка не коснётся нижнего края симфиза, затем кпереди, разгибая головку.',
+      outlet:'<b>Тракции:</b> если подзатылочная ямка у нижнего края симфиза — только кпереди. Если чуть выше — сначала книзу, затем кпереди.'}[lv]||''}
+    else if(pr==='op'){t=lv==='outlet'?'<b>Задний вид, выход</b> (внутренний поворот завершён, малый родничок у копчика, задний край большого родничка под лоном). Тракции книзу, пока передний край большого родничка не упрётся в нижний край лона (1-я точка фиксации). Затем кпереди до фиксации подзатылочной ямки у верхушки копчика (2-я точка). Затем кзади: из-под лона рождаются лоб, лицо, подбородок.':'<b>Задний вид</b> — КР описывает тракции только для выхода, когда внутренний поворот завершён. Точки фиксации при заднем виде: передний край большого родничка у нижнего края лона, затем подзатылочная ямка у копчика. Подзатылочная ямка к симфизу не подводится.'+NA}
+    else if(pr==='anter'){t=lv==='wide'?'<b>Переднеголовное, большой сегмент в широкой части.</b> Тракции кзади, пока середина лба не подойдёт к нижнему краю симфиза. Затем резко кпереди, пока затылочный бугор не подойдёт к крестцово-копчиковому сочленению. Затем книзу и кзади — головка разгибается и прорезывается.':'<b>Переднеголовное.</b> Точка фиксации — середина лба у нижнего края симфиза, затем затылочный бугор у крестцово-копчикового сочленения.'+NA}
+    else if(pr)t='ВЭП при этом предлежании противопоказана.';
+    if(t)ch+='<p>'+t+'</p>';
+    ch+='<p>Не более 20 минут. Три тракции без опускания или больше двух соскальзываний — стоп.</p>';
+  }
+  else if(tool==='af'){
+    ch+='<p>Малый родничок посередине между ложками, в 1,5 см от плоскости щипцов у замка; стреловидный шов перпендикулярен замку. Затем пробная тракция.</p>';
+    let t='';
+    if(pr==='oa'){t={narrow:'<b>Тракции:</b> кзади, пока большой сегмент в узкой части. Затем книзу, пока подзатылочная ямка не окажется у нижнего края симфиза (около 7 см от проводной точки). Затем кпереди — головка разгибается и врезывается.',
+      outlet:'<b>Тракции:</b> кпереди, разгибая головку.',wide:'АЩ при головке в широкой части противопоказаны.'}[lv]||''}
+    else if(pr==='op'||pr==='anter'){const n=pr==='op'?'Задний вид':'Переднеголовное';
+      t={narrow:`<b>${n}.</b> Тракции кзади, пока большой сегмент в узкой части. Затем книзу, пока большой сегмент не выйдет между узкой частью и выходом. В выходе — кзади, а не кпереди. Подзатылочная ямка к симфизу не подводится.`,
+      outlet:`<b>${n}, выход.</b> Тракции кзади (при переднем виде было бы кпереди).`,wide:'АЩ при головке в широкой части противопоказаны.'}[lv]||''}
+    else if(pr==='face')t='<b>Лицевое.</b>'+NA;
+    else if(pr)t='АЩ при этом предлежании противопоказаны.';
+    if(t)ch+='<p>'+t+'</p>';
+    ch+='<p>При удовлетворительном состоянии плода тракции по 30–60 с с интервалом 1,5–2 мин, операция длится 3–8 мин. При страдании плода — максимально быстро.</p>';
+  }
+  else ch+='<p>Выберите инструмент.</p>';
+  $('#opCheat').innerHTML=ch;
+  if(on&&!tick)tick=setInterval(renderOp,1000); if(!on&&tick){clearInterval(tick);tick=null}
+}
+$('#opBtns').addEventListener('click',e=>{const a=e.target.closest('[data-a]');if(a)opAct(a.dataset.a)});
+
+/* ---------- post ---------- */
+function icd(){
+  const o=S.op,t=o.tools;
+  if(o.outcome==='cs')return ['O66.5','Неудачная попытка применения '+(S.tool==='ve'?'вакуум-экстрактора':'щипцов')];
+  if(t.length>1)return ['O81.5','Комбинированное применение щипцов и вакуум-экстрактора'];
+  if(S.tool==='ve')return ['O81.4','Применение вакуум-экстрактора'];
+  if(S.tool==='af'){if(S.level==='outlet')return ['O81.0','Наложение низких (выходных) щипцов'];if(S.level==='narrow')return S.sut==='rot'?['O81.2','Средние (полостные) щипцы с поворотом']:['O81.1','Наложение средних (полостных) щипцов'];return ['O81.3','Другие и неуточнённые щипцы']}
+  return null;
+}
+function renderPost(r){
+  const q=[['При выборе метода учтён уровень положения головки',!!S.level],['Определены условия для влагалищного оперативного родоразрешения',r.miss.length===0],['Проведена антибиотикопрофилактика',!!S.abx],['Проведена оценка факторов риска ВТЭО',S.pck.includes('vte')]];
+  $('#quality').innerHTML=q.map(x=>`<div class="opt" style="cursor:default;${x[1]?'border-color:var(--go);background:var(--go-bg)':'border-color:var(--stop);background:var(--stop-bg)'}"><span style="font-weight:800;color:${x[1]?'var(--go)':'var(--stop)'};min-width:34px">${x[1]?'Да':'Нет'}</span><span>${esc(x[0])}</span></div>`).join('<div style="height:6px"></div>');
+  const c=icd();$('#icd').innerHTML=c?`<div class="vt" style="font-size:24px;font-weight:800">${c[0]}</div><div>${esc(c[1])}</div>`:'<p class="hint">Появится после выбора инструмента и исхода операции.</p>';
+}
+
+/* ---------- protocol ---------- */
+function buildProto(r){
+  const d=new Date(),ds=d.toLocaleDateString('ru-RU');
+  const L=[];
+  L.push('ОПЕРАТИВНЫЕ ВЛАГАЛИЩНЫЕ РОДЫ — ОБОСНОВАНИЕ И ПРОТОКОЛ');
+  L.push('Дата: '+ds+'    Ф.И.О.: ______________________________    № и/б: __________');
+  L.push('');
+  if(S.ga)L.push('Срок беременности: '+S.ga+' нед.');
+  if(S.ind.length)L.push('Показание: '+S.ind.map(k=>IND[k]).join('; ')+'.');
+  if(S.ind.includes('prolonged')&&S.par&&S.ea)L.push('Паритет: '+(S.par==='p1'?'первородящая':'повторнородящая')+', '+(S.ea==='y'?'с эпидуральной аналгезией':'без эпидуральной аналгезии')+(S.t2?'; начало II периода в '+S.t2:'')+'.');
+  if(S.level)L.push('Влагалищное исследование: головка '+LV[S.level].t+(LV[S.level].rc!=='—'?' (RCOG: '+LV[S.level].rc+')':'')+(S.pres?', '+PR[S.pres]:'')+(S.sut?', стреловидный шов '+SUT[S.sut]:'')+'.');
+  const ctr=S.ctr.map(k=>CTR[k]);
+  L.push('Противопоказания: '+(ctr.length?ctr.join('; '):'не выявлены')+'.');
+  const met=Object.keys(COND).filter(k=>S.cond.includes(k)).map(k=>COND[k]);
+  L.push('Условия: '+(r.miss.length?'соблюдены — '+(met.join(', ')||'нет')+'; НЕ отмечены — '+r.miss.map(k=>COND[k]).join(', '):'соблюдены все: '+met.join(', '))+'.');
+  const tool=S.tool==='ve'?'вакуум-экстракции плода':S.tool==='af'?'наложения акушерских щипцов':'';
+  L.push('');
+  L.push('Заключение: учитывая '+(S.ind.length?S.ind.map(k=>IND[k].split(',')[0].split(' (')[0]).join(', '):'…')+(S.level?', положение головки '+LV[S.level].t:'')+(S.pres?', '+PR[S.pres]:'')+', наличие условий и отсутствие противопоказаний, согласно КР «Оперативные влагалищные роды» (РОАГ, 2023) показано родоразрешение путём операции '+(tool||(r.title?r.title.toLowerCase():'…'))+'.');
+  const o=S.op;
+  if(o.start){
+    L.push('');L.push('Ход операции ('+(S.tool==='ve'?'ВЭП':'АЩ')+'):');
+    o.log.forEach(l=>L.push(hm(l.t)+' — '+l.txt));
+    L.push('Длительность: '+fmt((o.end||now())-o.start)+'. Тракций: '+o.tr+', с продвижением: '+o.pr+(S.tool==='ve'?', соскальзываний: '+o.slip:'')+', попыток: '+o.att+'.');
+  }
+  L.push('');
+  L.push('Эпизиотомия: '+(S.epi==='ml'?'срединно-латеральная под углом 60°':S.epi==='none'?'не выполнялась':'—')+'. Дистоция плечиков: '+(S.sd==='yes'?'да':S.sd==='no'?'нет':'—')+'.');
+  L.push('Антибиотикопрофилактика: '+(S.abx||'—')+'.');
+  const P={kos:'КОС пуповинной крови взят',vte:'факторы риска ВТЭО оценены',exam:'родовые пути осмотрены',pelvic:'рекомендованы упражнения для мышц тазового дна',neo:'новорождённый осмотрен неонатологом'};
+  if(S.pck.length)L.push(S.pck.map(k=>P[k]).join('; ')+'.');
+  const c=icd(); if(c)L.push('Код МКБ-10: '+c[0]+' — '+c[1]+'.');
+  L.push('');L.push('Врач: ______________________________   Подпись: __________');
+  return L.join('\n');
+}
+function renderProto(r){if(!S.protoEdited)$('#protoText').value=buildProto(r)}
+$('#protoText').addEventListener('input',()=>{S.protoEdited=true;save()});
+$('#regenBtn').onclick=()=>{S.protoEdited=false;save();refresh()};
+$('#copyBtn').onclick=async()=>{const t=$('#protoText');try{await navigator.clipboard.writeText(t.value);$('#copyNote').textContent='Скопировано.'}catch(e){t.select();try{document.execCommand('copy');$('#copyNote').textContent='Скопировано.'}catch(_){$('#copyNote').textContent='Выделите текст и скопируйте вручную.'}}};
+$('#printBtn').onclick=()=>{$('#printArea').innerHTML='<div class="pre">'+esc($('#protoText').value)+'</div>';window.print()};
+
+/* ---------- ref marks ---------- */
+$('#refMarks').innerHTML=Object.values(LV).map(v=>`<h4>Головка ${esc(v.t)}</h4><ul>${v.m.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul>`).join('');
+
+/* ---------- nav ---------- */
+$$('nav.tabs button').forEach(b=>b.onclick=()=>{$$('nav.tabs button').forEach(x=>x.classList.toggle('on',x===b));$$('.tab').forEach(t=>t.classList.toggle('on',t.id===b.dataset.t));window.scrollTo(0,0)});
+$('#toOp').onclick=()=>{const r=evalS();if(!S.tool){if(r.afOK&&(r.title.includes('щипцы')&&!r.title.includes('ВЭП')))S.tool='af';else if(r.veOK)S.tool='ve';else if(r.afOK)S.tool='af';save();restore()}refresh();$('nav.tabs button[data-t="t-op"]').click()};
+$('#resetAll').onclick=()=>{if(!confirm('Очистить все данные?'))return;S=fresh();save();restore();refresh()};
+
+function refresh(){const r=renderDecision();renderOp();renderPost(r);renderProto(r)}
+restore();refresh();
+setInterval(()=>{if(S.ind.includes('prolonged'))renderDecision()},30000);
+})();
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
+</body>
+</html>
